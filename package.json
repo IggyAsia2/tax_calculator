@@ -1,0 +1,41 @@
+{
+  "name": "form-tinh-tien-hoa",
+  "version": "1.0.0",
+  "description": "Form Tính Tiền Hóa Đơn - Ứng dụng tính tiền phòng và hóa đơn",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": ["electron", "hóa đơn", "tính tiền"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "build": {
+    "appId": "com.tinh-tien.hoa-don",
+    "productName": "Form Tính Tiền Hóa Đơn",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**",
+      "!node_modules/.cache/**"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
