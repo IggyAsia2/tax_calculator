@@ -11,15 +11,11 @@
     :root {
       --navy:    #0f172a;
       --navy2:   #1e293b;
-      --navy3:   #334155;
-      --slate:   #475569;
-      --muted:   #64748b;
       --border:  #2d3f55;
       --accent:  #3b82f6;
       --accent2: #1d4ed8;
       --gold:    #f59e0b;
-      --red:     #ef4444;
-      --green:   #10b981;
+      --muted:   #64748b;
       --text:    #e2e8f0;
       --text2:   #94a3b8;
       --white:   #f8fafc;
@@ -36,7 +32,6 @@
       overflow: hidden;
     }
 
-    /* ─── Background ─────────────────────────────────────── */
     .bg-grid {
       position: fixed; inset: 0; z-index: 0;
       background-image:
@@ -51,14 +46,11 @@
     .bg-glow-1 { width: 400px; height: 400px; background: #3b82f6; top: -100px; right: -80px; }
     .bg-glow-2 { width: 300px; height: 300px; background: #8b5cf6; bottom: 0; left: -60px; }
 
-    /* ─── Layout ─────────────────────────────────────────── */
     .app-wrapper {
       position: relative; z-index: 1;
       height: 100vh; display: flex; flex-direction: column;
-      padding: 0;
     }
 
-    /* ─── Header ─────────────────────────────────────────── */
     .header {
       display: flex; align-items: center; gap: 14px;
       padding: 18px 28px 14px;
@@ -76,7 +68,6 @@
     .header-title { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; color: var(--white); }
     .header-sub   { font-size: 11px; color: var(--text2); margin-top: 1px; }
 
-    /* ─── Main scroll area ───────────────────────────────── */
     .main-content {
       flex: 1; overflow-y: auto; padding: 22px 28px 100px;
       scrollbar-width: thin; scrollbar-color: var(--border) transparent;
@@ -85,7 +76,6 @@
     .main-content::-webkit-scrollbar-track { background: transparent; }
     .main-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-    /* ─── Cards ──────────────────────────────────────────── */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -106,9 +96,8 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 14px;
     }
-    .card-header-icon.blue   { background: rgba(59,130,246,0.15); color: #60a5fa; }
-    .card-header-icon.amber  { background: rgba(245,158,11,0.15); color: #fbbf24; }
-    .card-header-icon.red    { background: rgba(239,68,68,0.15);  color: #f87171; }
+    .card-header-icon.blue  { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .card-header-icon.amber { background: rgba(245,158,11,0.15);  color: #fbbf24; }
     .card-title {
       font-size: 12px; font-weight: 700; letter-spacing: 0.8px;
       text-transform: uppercase; color: var(--text2);
@@ -116,11 +105,7 @@
 
     .card-body { padding: 18px; }
 
-    /* ─── Form fields ─────────────────────────────────────── */
-    .form-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-    }
-    .form-grid.single { grid-template-columns: 1fr; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
     .field label {
@@ -143,25 +128,15 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
     }
-    .field input:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      color: var(--muted);
-    }
+    .field input:disabled { opacity: 0.35; cursor: not-allowed; color: var(--muted); }
     .field input.money {
       font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 15px;
-      color: var(--gold);
+      font-size: 15px; color: var(--gold);
     }
     .field select option { background: var(--navy2); color: var(--text); }
+    .field-hint { font-size: 10px; color: #f87171; margin-top: 2px; display: none; }
 
-    .field-hint {
-      font-size: 10px; color: var(--muted); margin-top: 2px;
-    }
-
-    /* ─── Result rows ─────────────────────────────────────── */
     .result-grid { display: flex; flex-direction: column; gap: 8px; }
-
     .result-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 14px;
@@ -176,19 +151,14 @@
       border-color: rgba(59,130,246,0.4);
       padding: 13px 16px;
     }
-
-    .result-label {
-      font-size: 12px; color: var(--text2); font-weight: 500;
-    }
+    .result-label { font-size: 12px; color: var(--text2); font-weight: 500; }
     .result-row.total .result-label { color: #93c5fd; font-size: 13px; font-weight: 600; }
-
     .result-value {
       font-family: 'Consolas', 'Courier New', monospace;
       font-size: 14px; font-weight: 600; color: var(--text);
     }
     .result-row.total .result-value { font-size: 16px; color: #60a5fa; }
 
-    /* ─── Grand total ─────────────────────────────────────── */
     .grand-total {
       margin-top: 16px;
       background: linear-gradient(135deg, rgba(220,38,38,0.25), rgba(239,68,68,0.15));
@@ -203,9 +173,7 @@
       font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
       text-transform: uppercase; color: #fca5a5;
     }
-    .grand-total-label {
-      font-size: 15px; font-weight: 800; color: var(--white);
-    }
+    .grand-total-label { font-size: 15px; font-weight: 800; color: var(--white); }
     .grand-total-value {
       font-family: 'Consolas', 'Courier New', monospace;
       font-size: 26px; font-weight: 700;
@@ -214,12 +182,9 @@
     }
     .grand-total-value.active { animation: pulse 0.4s ease; }
     @keyframes pulse {
-      0%  { transform: scale(1); }
       50% { transform: scale(1.06); }
-      100%{ transform: scale(1); }
     }
 
-    /* ─── Buttons ─────────────────────────────────────────── */
     .btn-row {
       display: flex; gap: 10px;
       padding: 14px 28px;
@@ -241,9 +206,8 @@
       color: #fff;
       box-shadow: 0 4px 15px rgba(59,130,246,0.3);
     }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
+    .btn-primary:hover  { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
     .btn-primary:active { transform: translateY(0); }
-
     .btn-ghost {
       background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
@@ -251,30 +215,25 @@
     }
     .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--text); }
 
-    /* ─── Toast ───────────────────────────────────────────── */
     .toast {
       position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: var(--navy2); border: 1px solid var(--border);
       border-radius: 9px; padding: 10px 18px;
       font-size: 13px; font-weight: 500;
-      display: flex; align-items: center; gap: 8px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
       opacity: 0; pointer-events: none;
       transition: all 0.3s cubic-bezier(.4,0,.2,1);
       z-index: 100; white-space: nowrap;
     }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.show    { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast.success { border-color: rgba(16,185,129,0.4); }
     .toast.error   { border-color: rgba(239,68,68,0.4); }
 
-    /* ─── Separator ───────────────────────────────────────── */
     .divider {
-      height: 1px; background: var(--border); margin: 14px 0;
-      position: relative;
+      height: 1px; background: var(--border); margin: 14px 0; position: relative;
     }
     .divider::after {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
     }
   </style>
@@ -286,7 +245,6 @@
 
 <div class="app-wrapper">
 
-  <!-- Header -->
   <header class="header">
     <div class="header-icon">🧾</div>
     <div>
@@ -295,10 +253,8 @@
     </div>
   </header>
 
-  <!-- Scrollable content -->
   <div class="main-content">
 
-    <!-- Card: Thông tin phòng -->
     <div class="card">
       <div class="card-header">
         <div class="card-header-icon blue">🏨</div>
@@ -326,14 +282,13 @@
           </div>
           <div class="field">
             <label>Tổng tiền muốn xuất (VNĐ)</label>
-            <input id="tongTienMuonXuat" class="money" type="text" inputmode="numeric" value="" placeholder="0" />
-            <span class="field-hint field-error" id="hint-tongTien" style="display:none;color:#f87171;">Không được thấp hơn tổng tiền phòng</span>
+            <input id="tongTienMuonXuat" class="money" type="text" inputmode="numeric" placeholder="0" />
+            <span class="field-hint" id="hint-tongTien">Không được thấp hơn tổng tiền phòng</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Card: Kết quả hóa đơn -->
     <div class="card">
       <div class="card-header">
         <div class="card-header-icon amber">📊</div>
@@ -359,7 +314,7 @@
           </div>
         </div>
 
-        <div class="grand-total" id="grandTotal">
+        <div class="grand-total">
           <div class="grand-total-left">
             <span class="grand-total-tag">💰 Cần Thu</span>
             <span class="grand-total-label">Số tiền cần thu</span>
@@ -369,157 +324,127 @@
       </div>
     </div>
 
-  </div><!-- /main-content -->
-
-  <!-- Bottom buttons -->
-  <div class="btn-row">
-    <button class="btn btn-primary" id="btnTinh">
-      <span>⚡</span> Tính Tiền
-    </button>
-    <button class="btn btn-ghost" id="btnReset">
-      <span>🔄</span> Reset
-    </button>
   </div>
 
-</div><!-- /app-wrapper -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btnTinh"><span>⚡</span> Tính Tiền</button>
+    <button class="btn btn-ghost"   id="btnReset"><span>🔄</span> Reset</button>
+  </div>
 
-<!-- Toast -->
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-  // ─── Constants ─────────────────────────────────────────────────────────────
-  const RESULT_IDS = ['r-tongTienPhong','r-tienHoaDonPhong','r-tienHoaDonThem','r-tongTienHoaDon','r-soTienCanThu'];
-
-  // ─── Format tiền ──────────────────────────────────────────────────────────
-  const fmt = (n) => {
-    if (n === null || n === undefined || isNaN(n)) return '—';
-    return new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' ₫';
+  // ── DOM refs (cached once) ──────────────────────────────────────────────────
+  const elGiaPhong      = document.getElementById('giaPhong');
+  const elSoDem         = document.getElementById('soDem');
+  const elKieu          = document.getElementById('kieuXuatHoaDon');
+  const elTongMuonXuat  = document.getElementById('tongTienMuonXuat');
+  const elBtnTinh       = document.getElementById('btnTinh');
+  const elHint          = document.getElementById('hint-tongTien');
+  const elToast         = document.getElementById('toast');
+  const elBtnReset      = document.getElementById('btnReset');
+  const elRowThem       = document.getElementById('row-tienHoaDonThem');
+  const elRowTong       = document.getElementById('row-tongTienHoaDon');
+  const elResults = {
+    tongTienPhong:   document.getElementById('r-tongTienPhong'),
+    tienHoaDonPhong: document.getElementById('r-tienHoaDonPhong'),
+    tienHoaDonThem:  document.getElementById('r-tienHoaDonThem'),
+    tongTienHoaDon:  document.getElementById('r-tongTienHoaDon'),
+    soTienCanThu:    document.getElementById('r-soTienCanThu'),
   };
 
-  // ─── Format input tiền (dấu phẩy mỗi 1000) ───────────────────────────────
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  const fmt        = n  => Number.isFinite(n) ? new Intl.NumberFormat('vi-VN').format(Math.round(n)) + ' ₫' : '—';
+  const parseMoney = el => parseInt(el.value.replace(/,/g, ''), 10) || 0;
+
   function formatMoneyInput(input) {
-    const pos = input.selectionStart;
+    const pos    = input.selectionStart;
     const oldLen = input.value.length;
-    const raw = input.value.replace(/[^\d]/g, '');
-    input.value = raw ? parseInt(raw, 10).toLocaleString('en-US') : '';
-    const shift = input.value.length - oldLen;
+    const raw    = input.value.replace(/\D/g, '');
+    input.value  = raw ? Number(raw).toLocaleString('en-US') : '';
+    const shift  = input.value.length - oldLen;
     input.setSelectionRange(pos + shift, pos + shift);
   }
 
-  function parseMoneyInput(id) {
-    const el = document.getElementById(id);
-    return el ? parseInt(el.value.replace(/,/g, ''), 10) || 0 : 0;
+  // ── Tính toán (thuần JS, không cần IPC) ───────────────────────────────────
+  function tinh(giaPhong, soDem, kieu, tongMuonXuat) {
+    const tongTienPhong = giaPhong * soDem;
+    const tienHoaDonPhong = tongTienPhong * 0.1;
+    const tienHoaDonThem  = kieu === 'cao_hon_10_15' ? (tongMuonXuat - tongTienPhong) * 0.15 : 0;
+    const tongTienHoaDon  = tienHoaDonPhong + tienHoaDonThem;
+    return { tongTienPhong, tienHoaDonPhong, tienHoaDonThem, tongTienHoaDon,
+             soTienCanThu: tongTienPhong + tongTienHoaDon };
   }
 
-  ['giaPhong', 'tongTienMuonXuat'].forEach(id => {
-    document.getElementById(id).addEventListener('input', function () { formatMoneyInput(this); });
-  });
+  // ── Đồng bộ UI theo trạng thái form ───────────────────────────────────────
+  function syncUI() {
+    const isCaoHon = elKieu.value === 'cao_hon_10_15';
+    elTongMuonXuat.disabled = !isCaoHon;
+    if (!isCaoHon) elTongMuonXuat.value = '';
+    elRowThem.style.display = isCaoHon ? '' : 'none';
+    elRowTong.style.display = isCaoHon ? '' : 'none';
 
-  // ─── Ẩn/hiện ô tổng tiền muốn xuất và hàng tiền hóa đơn thêm ─────────────
-  function updateFieldVisibility() {
-    const isCaoHon = document.getElementById('kieuXuatHoaDon').value === 'cao_hon_10_15';
-    const inputTong = document.getElementById('tongTienMuonXuat');
-    inputTong.disabled = !isCaoHon;
-    if (!isCaoHon) inputTong.value = '';
-    document.getElementById('row-tienHoaDonThem').style.display = isCaoHon ? '' : 'none';
-    document.getElementById('row-tongTienHoaDon').style.display = isCaoHon ? '' : 'none';
+    const tongPhong = parseMoney(elGiaPhong) * (parseFloat(elSoDem.value) || 1);
+    const invalid   = isCaoHon && parseMoney(elTongMuonXuat) < tongPhong;
+    elBtnTinh.style.display = invalid ? 'none' : '';
+    elHint.style.display    = invalid ? ''     : 'none';
   }
 
-  document.getElementById('kieuXuatHoaDon').addEventListener('change', () => {
-    updateFieldVisibility();
-    updateTinhBtn();
-    RESULT_IDS.forEach(id => document.getElementById(id).textContent = '—');
-  });
-
-  // ─── Ẩn/hiện nút Tính Tiền theo điều kiện tổng tiền muốn xuất ─────────────
-  function updateTinhBtn() {
-    const isCaoHon = document.getElementById('kieuXuatHoaDon').value === 'cao_hon_10_15';
-    const btn  = document.getElementById('btnTinh');
-    const hint = document.getElementById('hint-tongTien');
-
-    if (!isCaoHon) {
-      btn.style.display  = '';
-      hint.style.display = 'none';
-      return;
-    }
-
-    const tongPhong = parseMoneyInput('giaPhong') * (parseFloat(document.getElementById('soDem').value) || 1);
-    const invalid   = parseMoneyInput('tongTienMuonXuat') < tongPhong;
-    btn.style.display  = invalid ? 'none' : '';
-    hint.style.display = invalid ? '' : 'none';
-  }
-
-  ['giaPhong', 'soDem', 'tongTienMuonXuat'].forEach(id => {
-    document.getElementById(id).addEventListener('input', updateTinhBtn);
-  });
-
-  // ─── Toast ─────────────────────────────────────────────────────────────────
+  // ── Toast ──────────────────────────────────────────────────────────────────
   let toastTimer;
   function showToast(msg, type = 'info') {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.className = `toast show ${type}`;
+    elToast.textContent = msg;
+    elToast.className   = `toast show ${type}`;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { el.className = 'toast'; }, 3200);
+    toastTimer = setTimeout(() => { elToast.className = 'toast'; }, 3200);
   }
 
-  // ─── Lấy dữ liệu form ─────────────────────────────────────────────────────
-  function getFormData() {
-    return {
-      giaPhong:         parseMoneyInput('giaPhong'),
-      soDeM:            parseFloat(document.getElementById('soDem').value) || 1,
-      kieuXuatHoaDon:   document.getElementById('kieuXuatHoaDon').value,
-      tongTienMuonXuat: parseMoneyInput('tongTienMuonXuat'),
-    };
-  }
-
-  // ─── Hiển thị kết quả ─────────────────────────────────────────────────────
+  // ── Render kết quả ─────────────────────────────────────────────────────────
   function renderResult(r) {
-    const fields = { 'r-tongTienPhong': r.tongTienPhong, 'r-tienHoaDonPhong': r.tienHoaDonPhong,
-                     'r-tienHoaDonThem': r.tienHoaDonThem, 'r-tongTienHoaDon': r.tongTienHoaDon };
-    for (const [id, val] of Object.entries(fields))
-      document.getElementById(id).textContent = fmt(val);
-
-    const el = document.getElementById('r-soTienCanThu');
+    elResults.tongTienPhong.textContent   = fmt(r.tongTienPhong);
+    elResults.tienHoaDonPhong.textContent = fmt(r.tienHoaDonPhong);
+    elResults.tienHoaDonThem.textContent  = fmt(r.tienHoaDonThem);
+    elResults.tongTienHoaDon.textContent  = fmt(r.tongTienHoaDon);
+    const el = elResults.soTienCanThu;
     el.textContent = fmt(r.soTienCanThu);
     el.classList.remove('active');
     void el.offsetWidth;
     el.classList.add('active');
   }
 
-  // ─── Tính tiền ────────────────────────────────────────────────────────────
-  document.getElementById('btnTinh').addEventListener('click', async () => {
-    const data = getFormData();
-    if (data.giaPhong <= 0) return showToast('⚠️ Vui lòng nhập giá phòng', 'error');
-    if (data.soDeM   <= 0) return showToast('⚠️ Số đêm phải lớn hơn 0',   'error');
-
-    try {
-      const result = await window.api.tinhTien(data);
-      renderResult(result);
-      showToast('✅ Đã tính xong!', 'success');
-    } catch (err) {
-      showToast('❌ Lỗi tính toán: ' + err.message, 'error');
-    }
+  // ── Event listeners ────────────────────────────────────────────────────────
+  elGiaPhong.addEventListener('input',     function() { formatMoneyInput(this); syncUI(); });
+  elTongMuonXuat.addEventListener('input', function() { formatMoneyInput(this); syncUI(); });
+  elSoDem.addEventListener('input', syncUI);
+  elKieu.addEventListener('change', () => {
+    syncUI();
+    Object.values(elResults).forEach(el => { el.textContent = '—'; });
   });
 
-  // ─── Reset ────────────────────────────────────────────────────────────────
-  document.getElementById('btnReset').addEventListener('click', () => {
-    document.getElementById('giaPhong').value         = '250,000';
-    document.getElementById('soDem').value            = '1';
-    document.getElementById('kieuXuatHoaDon').value   = 'bang_gia';
-    document.getElementById('tongTienMuonXuat').value = '';
-    updateFieldVisibility();
-    updateTinhBtn();
-    RESULT_IDS.forEach(id => document.getElementById(id).textContent = '—');
+  elBtnTinh.addEventListener('click', () => {
+    const giaPhong = parseMoney(elGiaPhong);
+    const soDem    = parseFloat(elSoDem.value) || 1;
+    if (giaPhong <= 0) return showToast('⚠️ Vui lòng nhập giá phòng', 'error');
+    if (soDem    <= 0) return showToast('⚠️ Số đêm phải lớn hơn 0',   'error');
+    renderResult(tinh(giaPhong, soDem, elKieu.value, parseMoney(elTongMuonXuat)));
+    showToast('✅ Đã tính xong!', 'success');
+  });
+
+  elBtnReset.addEventListener('click', () => {
+    elGiaPhong.value     = '250,000';
+    elSoDem.value        = '1';
+    elKieu.value         = 'bang_gia';
+    elTongMuonXuat.value = '';
+    syncUI();
+    Object.values(elResults).forEach(el => { el.textContent = '—'; });
     showToast('🔄 Đã reset form', 'info');
   });
 
-  // Tính lần đầu khi load
-  window.addEventListener('DOMContentLoaded', () => {
-    updateFieldVisibility();
-    updateTinhBtn();
-    document.getElementById('btnTinh').click();
-  });
+  // ── Init ───────────────────────────────────────────────────────────────────
+  syncUI();
+  elBtnTinh.click();
 </script>
 </body>
 </html>

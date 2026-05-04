@@ -1,0 +1,22 @@
+[package]
+name = "form-tinh-tien-hoa"
+version = "1.0.0"
+description = "Form Tính Tiền Hóa Đơn"
+authors = []
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "1.5", features = [] }
+
+[dependencies]
+tauri = { version = "1.8", features = [] }
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
