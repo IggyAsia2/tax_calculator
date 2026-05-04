@@ -426,7 +426,7 @@
   elBtnTinh.addEventListener('click', () => {
     const giaPhong = parseMoney(elGiaPhong);
     const soDem    = parseFloat(elSoDem.value) || 1;
-    if (giaPhong <= 0) return showToast('⚠️ Vui lòng nhập giá phòng ', 'error');
+    if (giaPhong <= 0) return showToast('⚠️ Vui lòng nhập giá phòng', 'error');
     if (soDem    <= 0) return showToast('⚠️ Số đêm phải lớn hơn 0',   'error');
     renderResult(tinh(giaPhong, soDem, elKieu.value, parseMoney(elTongMuonXuat)));
     showToast('✅ Đã tính xong!', 'success');
