@@ -244,15 +244,6 @@
     .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
     .btn-primary:active { transform: translateY(0); }
 
-    .btn-success {
-      background: linear-gradient(135deg, #059669, #10b981);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(16,185,129,0.25);
-    }
-    .btn-success:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
-    .btn-success:active { transform: translateY(0); }
-    .btn-success:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
     .btn-ghost {
       background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
@@ -396,8 +387,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // ─── State ─────────────────────────────────────────────────────────────────
-  let lastResult = null;
+  // ─── Constants ─────────────────────────────────────────────────────────────
+  const RESULT_IDS = ['r-tongTienPhong','r-tienHoaDonPhong','r-tienHoaDonThem','r-tongTienHoaDon','r-soTienCanThu'];
 
   // ─── Format tiền ──────────────────────────────────────────────────────────
   const fmt = (n) => {
@@ -416,53 +407,44 @@
   }
 
   function parseMoneyInput(id) {
-    return parseInt(document.getElementById(id).value.replace(/,/g, ''), 10) || 0;
+    const el = document.getElementById(id);
+    return el ? parseInt(el.value.replace(/,/g, ''), 10) || 0 : 0;
   }
 
   ['giaPhong', 'tongTienMuonXuat'].forEach(id => {
-    document.getElementById(id).addEventListener('input', function () {
-      formatMoneyInput(this);
-    });
+    document.getElementById(id).addEventListener('input', function () { formatMoneyInput(this); });
   });
 
   // ─── Ẩn/hiện ô tổng tiền muốn xuất và hàng tiền hóa đơn thêm ─────────────
   function updateFieldVisibility() {
-    const kieu = document.getElementById('kieuXuatHoaDon').value;
-    const isCaoHon = kieu === 'cao_hon_10_15';
-
+    const isCaoHon = document.getElementById('kieuXuatHoaDon').value === 'cao_hon_10_15';
     const inputTong = document.getElementById('tongTienMuonXuat');
     inputTong.disabled = !isCaoHon;
     if (!isCaoHon) inputTong.value = '';
-
-    document.getElementById('row-tienHoaDonThem').style.display  = isCaoHon ? '' : 'none';
-    document.getElementById('row-tongTienHoaDon').style.display  = isCaoHon ? '' : 'none';
+    document.getElementById('row-tienHoaDonThem').style.display = isCaoHon ? '' : 'none';
+    document.getElementById('row-tongTienHoaDon').style.display = isCaoHon ? '' : 'none';
   }
 
   document.getElementById('kieuXuatHoaDon').addEventListener('change', () => {
     updateFieldVisibility();
     updateTinhBtn();
-    if (lastResult) document.getElementById('btnXuat').disabled = true;
-    lastResult = null;
-    ['r-tongTienPhong','r-tienHoaDonPhong','r-tienHoaDonThem','r-tongTienHoaDon','r-soTienCanThu']
-      .forEach(id => document.getElementById(id).textContent = '—');
+    RESULT_IDS.forEach(id => document.getElementById(id).textContent = '—');
   });
 
   // ─── Ẩn/hiện nút Tính Tiền theo điều kiện tổng tiền muốn xuất ─────────────
   function updateTinhBtn() {
-    const kieu = document.getElementById('kieuXuatHoaDon').value;
+    const isCaoHon = document.getElementById('kieuXuatHoaDon').value === 'cao_hon_10_15';
     const btn  = document.getElementById('btnTinh');
     const hint = document.getElementById('hint-tongTien');
 
-    if (kieu !== 'cao_hon_10_15') {
-      btn.style.display = '';
+    if (!isCaoHon) {
+      btn.style.display  = '';
       hint.style.display = 'none';
       return;
     }
 
     const tongPhong = parseMoneyInput('giaPhong') * (parseFloat(document.getElementById('soDem').value) || 1);
-    const muonXuat  = parseMoneyInput('tongTienMuonXuat');
-    const invalid   = muonXuat < tongPhong;
-
+    const invalid   = parseMoneyInput('tongTienMuonXuat') < tongPhong;
     btn.style.display  = invalid ? 'none' : '';
     hint.style.display = invalid ? '' : 'none';
   }
@@ -493,15 +475,15 @@
 
   // ─── Hiển thị kết quả ─────────────────────────────────────────────────────
   function renderResult(r) {
-    document.getElementById('r-tongTienPhong').textContent   = fmt(r.tongTienPhong);
-    document.getElementById('r-tienHoaDonPhong').textContent = fmt(r.tienHoaDonPhong);
-    document.getElementById('r-tienHoaDonThem').textContent  = fmt(r.tienHoaDonThem);
-    document.getElementById('r-tongTienHoaDon').textContent  = fmt(r.tongTienHoaDon);
+    const fields = { 'r-tongTienPhong': r.tongTienPhong, 'r-tienHoaDonPhong': r.tienHoaDonPhong,
+                     'r-tienHoaDonThem': r.tienHoaDonThem, 'r-tongTienHoaDon': r.tongTienHoaDon };
+    for (const [id, val] of Object.entries(fields))
+      document.getElementById(id).textContent = fmt(val);
 
     const el = document.getElementById('r-soTienCanThu');
     el.textContent = fmt(r.soTienCanThu);
     el.classList.remove('active');
-    void el.offsetWidth; // reflow
+    void el.offsetWidth;
     el.classList.add('active');
   }
 
@@ -513,7 +495,6 @@
 
     try {
       const result = await window.api.tinhTien(data);
-      lastResult = result;
       renderResult(result);
       showToast('✅ Đã tính xong!', 'success');
     } catch (err) {
@@ -529,11 +510,7 @@
     document.getElementById('tongTienMuonXuat').value = '';
     updateFieldVisibility();
     updateTinhBtn();
-
-    ['r-tongTienPhong','r-tienHoaDonPhong','r-tienHoaDonThem','r-tongTienHoaDon','r-soTienCanThu']
-      .forEach(id => document.getElementById(id).textContent = '—');
-
-    lastResult = null;
+    RESULT_IDS.forEach(id => document.getElementById(id).textContent = '—');
     showToast('🔄 Đã reset form', 'info');
   });
 

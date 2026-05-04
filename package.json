@@ -4,7 +4,8 @@
   "description": "Form Tính Tiền Hóa Đơn - Ứng dụng tính tiền phòng và hóa đơn",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "push": "git add . && git commit -m 'update' && git push",
+    "dev": "electron .",
     "build": "electron-builder"
   },
   "keywords": ["electron", "hóa đơn", "tính tiền"],
@@ -14,9 +15,6 @@
     "electron": "^28.0.0",
     "electron-builder": "^24.0.0"
   },
-  "dependencies": {
-    "exceljs": "^4.4.0"
-  },
   "build": {
     "appId": "com.tinh-tien.hoa-don",
     "productName": "Form Tính Tiền Hóa Đơn",
@@ -24,10 +22,12 @@
       "output": "dist"
     },
     "files": [
-      "**/*",
-      "!dist/**",
-      "!node_modules/.cache/**"
+      "main.js",
+      "preload.js",
+      "index.html",
+      "package.json"
     ],
+    "compression": "maximum",
     "win": {
       "target": "nsis"
     },
